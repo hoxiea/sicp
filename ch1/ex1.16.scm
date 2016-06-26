@@ -16,7 +16,7 @@
 
 
 ; Example:
-; Invariant: (b^n * a) == b^n always
+; Invariant: (b^n * a) == (b-orig)^n always
 ; (exp-iter-helper b 13 1)
 ; (exp-iter-helper b 12 b)
 ; (exp-iter-helper b^2 6 b)      ; halve power, double argument
