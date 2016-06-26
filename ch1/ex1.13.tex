@@ -1,0 +1,76 @@
+% Latex Template by Jennifer Pan, August 2011
+% http://www.jenpan.com/jen_pan/PsetLatexTemplate.tex
+
+% Work by Hoxie Ackerman
+% https://github.com/hoxiea/sicp/
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+% packages that allow mathematical formatting
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% package that allows you to change spacing
+\usepackage{setspace}
+
+% text become 1.5 spaced
+\onehalfspacing
+
+\setlength\parindent{0pt}   % no paragraph indentations
+
+% package that specifies normal margins
+\usepackage{fullpage}
+	
+
+\begin{document}
+\title{SICP: Exercise 1.13}
+\author{Hamilton Hoxie Ackerman}
+\date{26 June 2016}
+\maketitle 
+
+
+
+\paragraph{Problem)} Prove that Fib($n$) is the closest integer to $\phi^n / \sqrt{5}$, where $\phi = (1 + \sqrt{5})/2$.\\ \textbf{Hint:} Let $\psi = (1 - \sqrt(5))/2$. Use induction and the definition of the Fibonacci numbers to prove that Fib($n$) = $(\phi^n - \psi^n)/\sqrt{5}$. \\
+
+\rule{\textwidth}{1pt}
+
+For reference, 
+\[
+    \text{Fib}(n)=\begin{cases}
+               0, n = 0 \\
+               1, n = 1 \\
+               \text{Fib}(n-1) + \text{Fib}(n-2), \text{else}
+            \end{cases}
+\]
+
+Also note that $\phi^2 = \phi + 1$ and $\psi^2 = \psi + 1$.
+
+\rule{\textwidth}{1pt}
+
+As the hint suggests, we begin by proving by mathematical induction that Fib($n$) = $(\phi^n - \psi^n)/\sqrt{5}$.
+
+\textbf{Base case (n = 0):} $(\phi^0 - \psi^0)/\sqrt{5} = (1 - 1) / \sqrt{5} = 0 \equiv \text{Fib(0)}$.
+
+\textbf{Base case (n = 1):} $(\phi^1 - \psi^1)/\sqrt{5} = (\frac{1 + \sqrt{5}}{2} - \frac{1 - \sqrt{5}}{2}) / \sqrt{5} = \frac{2 \sqrt{5}}{2 \sqrt{5}} = 1 \equiv \text{Fib(1)}$.
+
+\textbf{Inductive Step:} Assume this relationship holds up to some $n$ value. We want to show that Fib($n + 1$) = $(\phi^{n+1} - \psi^{n+1})/\sqrt{5}$. By definition, Fib($n + 1$) = Fib($n$) + Fib($n-1$). By inductive assumption, therefore, we have:
+
+\begin{align*}
+    Fib(n+1) &= Fib(n) + Fib(n-1)\\
+             &= \frac{\phi^n - \psi^n}{\sqrt{5}} + 
+                \frac{\phi^{n-1} - \psi^{n-1}}{\sqrt{5}}\\
+             &= \frac{\phi^n + \phi^{n-1} - (\psi^n + \psi^{n-1})}{\sqrt{5}}
+             \stackrel{?}{=} \frac{\phi^{n+1} - \psi^{n+1}}{\sqrt{5}} \\
+             &\Leftrightarrow  \phi^n + \phi^{n-1} - (\psi^n + \psi^{n-1}) = \phi^{n+1} - \psi^{n+1}
+\end{align*}
+
+To make this work, note that $\phi^{n+1} = \phi^2 \cdot \phi^{n-1} = (\phi + 1) \cdot \phi^{n-1} = \phi^n + \phi^{n-1}$. Similarly, $\psi^{n+1} = \psi^n + \psi^{n-1}$. So indeed, our inductive step holds, establishing that Fib($n$) = $(\phi^{n} - \psi^{n})/\sqrt{5}$.
+
+To show that this implies that Fib($n$) is the closest integer to $\phi^n / \sqrt{5}$, we essentially need the $\psi$ term in our expression for Fib($n$) to be insignificant. And as luck would have it, $|\psi| \approx 0.618034 < 1$, so that $\lim_{n \to \infty} \psi^n = 0$.
+
+Of course, both $\phi$ and $\psi$ are irrational numbers, and yet the difference of their powers must always be an integer (since Fibonacci numbers are integers). This limit demonstrates that $\psi^n$ essentially accounts for the irrational component of $\phi^n$ without really changing the magnitude of $\phi^n$. So indeed, the closest integer to $\phi^n$ is Fib($n$).
+
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
