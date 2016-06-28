@@ -6,7 +6,7 @@
 ; What happens if we ask the interpreter to evaluate the combination (f f)?
 (f f)
 
-; It crashes! f calls its argument with argument 2. So on its third iteration:
+; It crashes! f calls its argument with argument 2:
 ; (f f)
 ; (f 2)
 ; (2 2)    ; error: 2 is not a function!
