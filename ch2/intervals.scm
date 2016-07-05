@@ -72,3 +72,28 @@
                      (/ 1.0 (upper-bound y))
                      (/ 1.0 (lower-bound y))))))
 
+; Exercise 2.11
+; "By testing the signs of the endpoints of the intervals, it is possible to break
+; `mul-interval` into nine cases, only one of which requires more than two
+; multiplications." Rewrite the procedure using this suggestion.
+
+; Given the problem of (a,b) * (c,d), assume WLOG that a<b and c<d.
+; Then there are indeed 9 possible sign configurations:
+;
+;   a   b   c   d   |   e      f
+; -------------------------------------
+;   +   +   +   +   |  ac      bd
+;   -   +   +   +   |  ad      bd
+;   +   +   -   +   |  bc      bd
+;   -   -   +   +   |  ad      bc
+;   +   +   -   -   |  bc      ad
+;   -   -   -   +   |  ad      ac
+;   -   +   -   -   |  bc      ad
+;   -   -   -   -   |  bd      ac
+;   -   +   -   +   |  alpha   beta,
+; where alpha = min(ad, bc) and beta = max(ac, bd)
+; Thus, only one case requires more than two multiplications.
+
+; Implementing this is going to be ugly, and it's not clear that this is going to
+; be a bottleneck in our program, so let's hold off on the implementation for now.
+
