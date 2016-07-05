@@ -29,3 +29,30 @@
 (define (sub-interval x y)
   (make-interval (- (lower-bound x) (upper-bound y))
                  (- (upper-bound x) (lower-bound y))))
+
+; Exercise 2.9
+; width == radius of interval
+; Show that the width of a sum or difference is a function only of the widths
+; of the inputs. Give examples to show that this is not the case for
+; multiplication/division.
+
+; If x is interval a-------alpha-------b with width w1
+;    y is interval c-----------beta-----------d with width w2,
+; then x + y is interval e----------------gamma-----------------f, where
+;   gamma = alpha + beta
+;   e = gamma - (w1 + w2)
+;   f = gamma + (w1 + w2)
+; Thus, x + y has width (w1 + w2), which is a function only of the widths of x and y.
+; And subtraction can be expressed directly in terms of addition, so it should be true
+; for subtraction too.
+
+; To prove that this doens't hold for multiplication, we need two sets of intervals
+; with the same widths that produce products that have different widths. Two such
+; pairs of intervals are:
+; (-3, 3) x (4, 6)  = (-18, 18) => width = 18
+; (1, 7) x (4, 6)   = (4, 42)  =>  width = 19
+; Since the widths of the inputs were the same, but the widths of the resulting
+; products differed, there must be more to the story than just the widths of
+; the inputs.  And division is expressed directly in terms of multiplication,
+; so we would expect that to be the case here as well.
+
