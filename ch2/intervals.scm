@@ -56,3 +56,19 @@
 ; the inputs.  And division is expressed directly in terms of multiplication,
 ; so we would expect that to be the case here as well.
 
+
+; Exercise 2.10
+; "It is not clear what it means to divide by an interval that spans zero."
+; Modify Alyssa's code to check for this condition and to signal an error if it
+; occurs.
+(define (interval-includes-zero lower upper)
+  (not (> (sgn (* lower upper)) 0)))
+
+(define (div-interval x y)
+  (if (interval-includes-zero x y)
+      (error "Can't divide by an interval that includes zero")
+      (mul-interval x
+                    (make-interval
+                     (/ 1.0 (upper-bound y))
+                     (/ 1.0 (lower-bound y))))))
+
