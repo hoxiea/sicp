@@ -8,10 +8,12 @@
 
 (define (same-parity first . rest)
   (define (same-parity-helper winners remaining)
-    (cond ((null? remaining) winners)
-          ((has-same-parity (car remaining) first) 
-           (same-parity-helper (cons (car remaining) winners) (cdr remaining)))
-          (else (same-parity-helper winners (cdr remaining)))))
+    (if (null? remaining)
+      winners
+      (let ([contender (car remaining)])
+        (if (has-same-parity contender first)
+          (same-parity-helper (cons contender winners) (cdr remaining))
+          (same-parity-helper winners (cdr remaining))))))
   (cons first (same-parity-helper '() (reverse rest))))
 
 
