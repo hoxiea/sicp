@@ -158,3 +158,11 @@
 ; So the proportion tolerance for the product is approximately (p1 + p2), a simple
 ; function of the proportion tolerances for the individual intervals.
 
+
+; Exercise 2.14 - 2.16
+; Eva Lu is right. Every time we use an uncertain number in our intervals, we
+; add noise to the system. We can never remove noise from the system.
+;
+; So while 0 = R1 - R1 is algebraically true, there's absolutely no uncertainly
+; on the quantity 0, while (R1 - R1) could have quite a deal of uncertainty.
+; and (R1 - R1) + (R1 - R1) would be even worse.
