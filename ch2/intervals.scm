@@ -97,3 +97,30 @@
 ; Implementing this is going to be ugly, and it's not clear that this is going to
 ; be a bottleneck in our program, so let's hold off on the implementation for now.
 
+;;;;;;;;;;;;
+
+(define (make-center-width c w)
+  (make-interval (- c w) (+ c w)))
+
+(define (center i)
+  (/ (+ (lower-bound i)
+        (upper-bound i))
+     2))
+
+(define (width i)
+  (/ (- (upper-bound i)
+        (lower-bound i))
+     2))
+
+; Exercise 2.12
+; Define a constructor make-center-percent that takes a center and a percentage
+; tolerance and produces the desired intervals. You must also define a selector
+; `percent` that produces the percentage tolerance.
+(define (make-center-percent c p)
+  (let* ([proportion (/ p 100)]
+         [width (* proportion c)])
+    (make-center-width c width)))
+
+(define (percent int)
+  (let ([prop (/ (width int) (center int))])
+    (* 100 prop)))
