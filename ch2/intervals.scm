@@ -124,3 +124,37 @@
 (define (percent int)
   (let ([prop (/ (width int) (center int))])
     (* 100 prop)))
+
+
+; Exercise 2.13
+; Show that under the assumption of small percentage tolerances, there is a simple
+; formula for the approximate percentage tolerance of the product of two intervals
+; in terms of the tolerances of the factors. Assume all numbers positive.
+
+; I chose to work in PROPORTIONS instead of PERCENTAGES, but the math holds either way.
+; Consider two intervals:
+; I1 with proportion tolerance p1:     a------------alpha------------b
+; I2 with proportion tolerance p2:     c--------beta--------d
+; Then b = (1 + p1)*alpha
+;      a = (1 - p1)*alpha
+;      d = (1 + p2)*alpha
+;      c = (1 - p2)*alpha
+;
+; If all numbers are positive, then the product of I1 and I2 will be:
+; ac------------------alpha*beta-------------------bd
+;
+; ac = (1 - p1)*alpha * (1 - p2)*beta
+;    = (1 - p1)(1 - p2) alpha*beta
+;    = [1 - (p1 + p2) + p1*p2] alpha*beta
+;
+; bd = (1 + p1)*alpha * (1 + p2)*beta
+;    = (1 + p1)(1 + p2) alpha*beta
+;    = [1 + (p1 + p2) + p1*p2] alpha*beta
+;
+; And if p1 and p2 are both small, then p1*p2 will be REALLY small, so
+; ac ~= [1 - (p1 + p2)] * alpha*beta
+; bd ~= [1 + (p1 + p2)] * alpha*beta
+;
+; So the proportion tolerance for the product is approximately (p1 + p2), a simple
+; function of the proportion tolerances for the individual intervals.
+
